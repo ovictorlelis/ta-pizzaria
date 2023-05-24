@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br" x-data :class="$store.darkMode.on && 'dark'">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pizzaria</title>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link rel="stylesheet" href="./assets/styles/style.css">
+</head>
+
+<body class="bg-gray-100 dark:bg-gray-800">
+
+  <header class="bg-white dark:bg-gray-600 shadow-sm border-b border-gray-200 dark:border-gray-500 py-4 mb-6">
+    <nav class="max-w-7xl mx-auto px-4 flex items-center justify-between">
+      <img src="./assets/img/logo.svg" alt="logo" class="h-12 hover:rotate-45 cursor-pointer">
+
+
+      <div class="flex items-center" x-data="{
+        darkMode: window.localStorage.getItem('darkMode')
+      }">
+        <button x-data @click="$store.darkMode.toggle()">
+          <svg x-show="$store.darkMode.on == false" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"></path>
+          </svg>
+
+          <svg x-show="$store.darkMode.on == true" class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"></path>
+          </svg>
+      </div>
+    </nav>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 flex" x-data x-init="console.log($store.darkMode.on)">
+
+    <div class="flex-1 px-4">
+      <h1 class="text-4xl text-center mb-4 text-gray-600 dark:text-gray-50">Cardápio</h1>
+      <nav class="my-6">
+        <ul class="flex items-center gap-4">
+          <li class="bg-white dark:bg-gray-600 dark:text-gray-50 rounded shadow-sm px-6 py-2 border border-gray-200 dark:border-gray-500 cursor-pointer">Todos</li>
+          <li class="bg-white border border-gray-200 dark:border-gray-500 dark:bg-gray-600 dark:text-gray-50 rounded shadow-sm px-6 py-2 border border-gray-200 dark:border-gray-500 cursor-pointer">Pizzas</li>
+          <li class="bg-white border border-gray-200 dark:border-gray-500 dark:bg-gray-600 dark:text-gray-50 rounded shadow-sm px-6 py-2 border border-gray-200 dark:border-gray-500 cursor-pointer">Bebidas</li>
+          <li class="bg-white border border-gray-200 dark:border-gray-500 dark:bg-gray-600 dark:text-gray-50 rounded shadow-sm px-6 py-2 border border-gray-200 dark:border-gray-500 cursor-pointer">Sobremesas</li>
+        </ul>
+      </nav>
+
+      <div>
+        <h2 class="text-2xl mb-2 font-medium dark:text-gray-50">Pizzas</h2>
+        <div class="grid grid-cols-4 gap-4">
+          <div class="bg-white border border-gray-200 dark:border-gray-500 dark:bg-gray-600 dark:text-gray-50 p-4 rounded-md shadow-sm text-center">
+            <h3 class="text-2xl font-medium">Calabresa</h3>
+            <p class="text-sm">Molho, muçarela, calabresa fatiada, cebola fatiada e orégano.</p>
+            <span class="text-sm">R$ 27,99</span>
+          </div>
+
+          <div class="bg-white border border-gray-200 dark:border-gray-500 dark:bg-gray-600 dark:text-gray-50 p-4 rounded-md shadow-sm text-center">
+            <h3 class="text-2xl font-medium">Calabresa</h3>
+            <p class="text-sm">Molho, muçarela, calabresa fatiada, cebola fatiada e orégano.</p>
+            <span class="text-sm">R$ 27,99</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <template x-if="false">
+      <div class="bg-white p-6 rounded-md w-1/4 divide-y">
+        <h2 class="text-2xl font-bold py-2">Carrinho</h2>
+        <div>
+          <ul>
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+          </ul>
+        </div>
+      </div>
+    </template>
+  </main>
+
+  <footer class="text-sm text-gray-600 dark:text-gray-50 text-center mt-6 py-4">
+    <a href="//ovictorlelis.dev">Desenvolvido por Victor Lelis</a>
+  </footer>
+
+  <script>
+
+    document.addEventListener('alpine:init', () => {
+      Alpine.store('darkMode', {
+        on: window.localStorage.getItem('darkMode') === "true" ?? window.localStorage.setItem('darkMode', false),
+        toggle() {
+          window.localStorage.setItem('darkMode', !this.on)
+          this.on = !this.on
+        }
+      })
+    })
+  </script>
+</body>
+
+</html>
